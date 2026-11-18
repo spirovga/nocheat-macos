@@ -1,6 +1,6 @@
-# Human or AI for macOS
+# nocheat for macOS
 
-The macOS client of **Human or AI**: it listens to a job interview, shows a live transcript of
+The macOS client of **nocheat** ([nocheat.dev](https://nocheat.dev)): it listens to a job interview, shows a live transcript of
 both sides, and reports how likely the candidate's answers are AI-generated.
 
 This repository is the full source of the app, published so you can check what it does with
@@ -31,7 +31,7 @@ There is no analytics, no crash reporting and no third-party SDK.
 
 ## What is stored on this Mac
 
-In `~/Library/Application Support/Human or AI/`, readable by your user account only (`Credential.swift`):
+In `~/Library/Application Support/nocheat/`, readable by your user account only (`Credential.swift`):
 
 - `credential`: your access key or sign-in session. Removed when you sign out.
 - `history.json`: the transcript, so it survives a restart. Removed by **Clear history** or when you sign out.
@@ -43,7 +43,7 @@ In `~/Library/Application Support/Human or AI/`, readable by your user account o
 Requires macOS 14.4 or later and the Swift toolchain (Xcode or Command Line Tools).
 
 ```sh
-scripts/build-app.sh      # builds "build/Human or AI.app", ad-hoc signed
+scripts/build-app.sh      # builds "build/nocheat.app", ad-hoc signed
 ```
 
 ## Licence

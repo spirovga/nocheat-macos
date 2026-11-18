@@ -2,19 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleName</key><string>Human or AI</string>
-  <key>CFBundleDisplayName</key><string>Human or AI</string>
-  <key>CFBundleIdentifier</key><string>app.anticheating.desktop</string>
-  <key>CFBundleExecutable</key><string>Anticheating</string>
+  <key>CFBundleName</key><string>nocheat</string>
+  <key>CFBundleDisplayName</key><string>nocheat</string>
+  <key>CFBundleIdentifier</key><string>dev.nocheat.macos</string>
+  <key>CFBundleExecutable</key><string>Nocheat</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleShortVersionString</key><string>0.1.0</string>
   <key>CFBundleVersion</key><string>1</string>
   <key>LSMinimumSystemVersion</key><string>14.4</string>
   <key>NSHighResolutionCapable</key><true/>
   <key>NSMicrophoneUsageDescription</key>
-  <string>Human or AI listens to your microphone to capture the interviewer's questions.</string>
+  <string>nocheat listens to your microphone to capture the interviewer's questions.</string>
   <key>NSAudioCaptureUsageDescription</key>
-  <string>Human or AI listens to the call audio played by this Mac to capture the candidate's answers.</string>
+  <string>nocheat listens to the call audio played by this Mac to capture the candidate's answers.</string>
   <key>NSAppTransportSecurity</key>
   <dict><key>NSAllowsLocalNetworking</key><true/></dict>
 </dict>

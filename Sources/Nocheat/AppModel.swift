@@ -375,7 +375,7 @@ final class AppModel: ObservableObject {
         Task { [weak self] in
             try? await Task.sleep(for: .seconds(10))
             guard let self, self.phase == .live, !self.system.heardSound else { return }
-            self.notice = "No call audio is reaching the app. If the call is playing, allow Human or AI in System Settings › Privacy & Security › Screen & System Audio Recording › System Audio Recording Only, then start again."
+            self.notice = "No call audio is reaching the app. If the call is playing, allow nocheat in System Settings › Privacy & Security › Screen & System Audio Recording › System Audio Recording Only, then start again."
         }
     }
 
@@ -410,7 +410,7 @@ final class AppModel: ObservableObject {
 
     /// Saves the transcript as a plain-text file wherever the user chooses. Nothing leaves this Mac.
     func exportHistory() {
-        var text = "Human or AI · transcript\n"
+        var text = "nocheat · transcript\n"
         var previous = ""
         for line in lines where !line.text.isEmpty {
             if line.speaker == TranscriptLine.divider {

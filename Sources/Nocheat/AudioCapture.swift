@@ -73,7 +73,7 @@ final class SystemAudioCapture {
     private var deviceID = AudioObjectID(kAudioObjectUnknown)
     private var procID: AudioDeviceIOProcID?
     private let converter = PCMConverter()
-    private let queue = DispatchQueue(label: "anticheating.system-audio")
+    private let queue = DispatchQueue(label: "nocheat.system-audio")
     private let lock = NSLock()
     private var sound = false
 
@@ -94,7 +94,7 @@ final class SystemAudioCapture {
         // include the output device: the microphone's voice processing takes that device over, and
         // an aggregate built around it then stops delivering audio.
         let description: [String: Any] = [
-            kAudioAggregateDeviceNameKey: "Human or AI tap",
+            kAudioAggregateDeviceNameKey: "nocheat tap",
             kAudioAggregateDeviceUIDKey: UUID().uuidString,
             kAudioAggregateDeviceIsPrivateKey: true,
             kAudioAggregateDeviceIsStackedKey: false,

@@ -1,11 +1,11 @@
 import SwiftUI
 
 @main
-struct AnticheatingApp: App {
+struct NocheatApp: App {
     @StateObject private var model = AppModel()
 
     var body: some Scene {
-        WindowGroup("Human or AI") {
+        WindowGroup("nocheat") {
             Group {
                 switch model.access {
                 case .signedOut: KeyView()
@@ -63,7 +63,7 @@ private struct MonoButtonBody: View {
 
 struct Wordmark: View {
     var body: some View {
-        Text("Human or AI").font(.system(size: 13, weight: .semibold)).tracking(0.5)
+        Text("nocheat").font(.system(size: 13, weight: .semibold)).tracking(0.5)
     }
 }
 

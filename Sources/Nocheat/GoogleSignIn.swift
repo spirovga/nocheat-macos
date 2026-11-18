@@ -3,7 +3,7 @@ import AuthenticationServices
 import CryptoKit
 
 /// Google sign-in through the server, which holds the Google client secret. The browser sheet ends on
-/// anticheating://auth?code=…, and the code plus our verifier are traded for a session token.
+/// nocheat://auth?code=…, and the code plus our verifier are traded for a session token.
 @MainActor
 final class GoogleSignIn: NSObject, ASWebAuthenticationPresentationContextProviding {
     enum Failure: LocalizedError {
@@ -30,7 +30,7 @@ final class GoogleSignIn: NSObject, ASWebAuthenticationPresentationContextProvid
         start.queryItems = [URLQueryItem(name: "challenge", value: challenge)]
 
         let callback: URL = try await withCheckedThrowingContinuation { continuation in
-            let session = ASWebAuthenticationSession(url: start.url!, callbackURLScheme: "anticheating") { url, _ in
+            let session = ASWebAuthenticationSession(url: start.url!, callbackURLScheme: "nocheat") { url, _ in
                 if let url { continuation.resume(returning: url) } else { continuation.resume(throwing: Failure.cancelled) }
             }
             session.presentationContextProvider = self
