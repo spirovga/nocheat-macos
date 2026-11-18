@@ -45,3 +45,8 @@ Requires macOS 14.4 or later and the Swift toolchain (Xcode or Command Line Tool
 ```sh
 scripts/build-app.sh      # builds "build/Human or AI.app", ad-hoc signed
 ```
+
+## Licence
+
+Copyright © 2026 Gregory Spirov. All rights reserved. The source is published so you can read,
+build and audit the app; it is not licensed for reuse or redistribution.
