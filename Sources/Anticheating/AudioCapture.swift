@@ -74,8 +74,15 @@ final class SystemAudioCapture {
     private var procID: AudioDeviceIOProcID?
     private let converter = PCMConverter()
     private let queue = DispatchQueue(label: "anticheating.system-audio")
+    private let lock = NSLock()
+    private var sound = false
+
+    /// True once the tap has delivered anything but digital silence. Without the System Audio
+    /// Recording permission macOS still runs the tap but feeds it zeros, and reports no error.
+    var heardSound: Bool { lock.withLock { sound } }
 
     func start(onAudio: @escaping (Data) -> Void) throws {
+        lock.withLock { sound = false }
         // A tap on everything the system plays (this app itself plays nothing).
         let tap = CATapDescription(stereoGlobalTapButExcludeProcesses: [])
         tap.uuid = UUID()
@@ -104,9 +111,10 @@ final class SystemAudioCapture {
             try check(AudioObjectGetPropertyData(tapID, &address, 0, nil, &size, &asbd))
             guard let format = AVAudioFormat(streamDescription: &asbd) else { throw CaptureError.systemAudio(0) }
 
-            try check(AudioDeviceCreateIOProcIDWithBlock(&procID, deviceID, queue) { [converter] _, input, _, _, _ in
+            try check(AudioDeviceCreateIOProcIDWithBlock(&procID, deviceID, queue) { [converter, weak self] _, input, _, _, _ in
                 guard let buffer = AVAudioPCMBuffer(pcmFormat: format, bufferListNoCopy: input, deallocator: nil),
                       let data = converter.convert(buffer) else { return }
+                if let self, !self.heardSound, data.contains(where: { $0 != 0 }) { self.lock.withLock { self.sound = true } }
                 onAudio(data)
             })
             try check(AudioDeviceStart(deviceID, procID))

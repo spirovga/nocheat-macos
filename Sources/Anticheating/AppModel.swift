@@ -332,6 +332,7 @@ final class AppModel: ObservableObject {
                     client.sendAudio(.candidate, $0)
                 }
                 if phase == .connecting { phase = .live }
+                watchCallAudio()
             } catch {
                 fail("Audio capture failed: \(error.localizedDescription)")
             }
@@ -365,6 +366,16 @@ final class AppModel: ObservableObject {
             finish()
         default:
             break
+        }
+    }
+
+    /// Warns when the call side stays digitally silent: usually the System Audio Recording permission
+    /// is missing (macOS then feeds the app zeros without an error), or nothing is playing yet.
+    private func watchCallAudio() {
+        Task { [weak self] in
+            try? await Task.sleep(for: .seconds(10))
+            guard let self, self.phase == .live, !self.system.heardSound else { return }
+            self.notice = "No call audio is reaching the app. If the call is playing, allow Human or AI in System Settings › Privacy & Security › Screen & System Audio Recording › System Audio Recording Only, then start again."
         }
     }
 
